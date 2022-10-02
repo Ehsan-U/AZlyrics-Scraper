@@ -1,0 +1,7 @@
+Content-Length: 138
+Server: nginx
+Date: Sat, 01 Oct 2022 14:11:45 GMT
+Content-Type: text/html
+Location: https://b.azlyrics.com/?u=/suggest.php
+Access-Control-Allow-Origin: https://www.azlyrics.com
+Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
