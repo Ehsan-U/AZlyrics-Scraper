@@ -15,5 +15,15 @@ def get_songs():
     artist = Prompt.ask(" \n[bold purple][+][reset] Enter an artist name", default='Ed Sheeran')
     artist = artist.replace(' ','%20')
     filename = Prompt.ask("[bold purple][+][reset] Enter the output filename", default='Songs')
-    cmdline.execute(f'scrapy crawl az_spider -a artist={artist} -o {filename}.csv'.split())
+    # stop = Prompt.ask("[bold purple][+][reset] Enter the number of songs to extract", default='10')
+    print("[+] Crawling process started..")
+    cmdline.execute(f'scrapy crawl splash_spider -a artist={artist} -a stop=1 -o {filename}.csv'.split())
+    
 get_songs()
+print("\n[+] Finished\n")
+# import requests 
+# proxies = {
+#     'http':'http://ehsan:ehsan123@geo.iproyal.com:22323',
+#     'https':'http://ehsan:ehsan123@geo.iproyal.com:22323'
+# }
+# print(requests.get('http://httpbin.org/ip',proxies=proxies).text)

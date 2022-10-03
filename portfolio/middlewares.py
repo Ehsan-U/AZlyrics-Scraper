@@ -2,12 +2,11 @@
 #
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
 from scrapy import signals
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
-
+import random
 
 class PortfolioSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
@@ -101,3 +100,24 @@ class PortfolioDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+class ProxyMiddleware(object):
+    def process_request(self, request, spider):
+        request.meta['proxy'] = '<proxy>'
+
+class AgentMiddleware:
+
+    def __init__(self, settings):
+        self.settings = settings
+        self.agent_File = self.settings.get("UA_PATH")
+        with open(self.agent_File,'r') as f:
+            self.agents = f.readlines()
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler.settings)
+
+    def process_request(self, request, spider):
+        agent = random.choice(self.agents)
+        request.headers['User-Agent'] = agent
+        return None
